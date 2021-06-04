@@ -1,3 +1,6 @@
+import dao.jdbc.JdbcPlaceDao;
+import model.Place;
+
 import java.util.Scanner;
 
 public class Launcher {
@@ -5,9 +8,31 @@ public class Launcher {
 
         MainMenu();
         Scanner kb = new Scanner(System.in);
+        JdbcPlaceDao jdbcPlaceDao = new JdbcPlaceDao();
         int choice = kb.nextInt();
 
-        //System.out.println("Mon choix : " + choice);
+        switch (choice) {
+            case 1 -> {
+                System.out.println("Name : ");
+                Scanner kb1 = new Scanner(System.in);
+                String name = kb1.nextLine();
+                Long id = jdbcPlaceDao.createPlace(new Place(name));
+                System.out.printf("Place added with the ID-%d.\n", id);
+                System.out.println("---------------------------");
+                MainMenu();
+            }
+            case 2 -> {
+
+            }
+            case 3 -> {
+
+            }
+            default -> {
+                System.out.println("Please, choose a number between 1 to 8 !");
+                System.out.println("---------------------------");
+                MainMenu();
+            }
+        }
 
 
 

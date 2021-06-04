@@ -114,9 +114,6 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao<Long, Place> {
     private Place mapToPlace(ResultSet rs) throws SQLException {
         Long id = rs.getLong("id");
         String name = rs.getString("name");
-        Place pl = new Place();
-        pl.setId(id);
-        pl.setName(name);
-        return pl;
+        return new Place(id, name);
     }
 }
