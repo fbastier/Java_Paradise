@@ -6,7 +6,8 @@ public class Launcher {
         MainMenu();
         Scanner kb = new Scanner(System.in);
         int choice = kb.nextInt();
-        System.out.println("Mon choix : " + choice);
+
+        //System.out.println("Mon choix : " + choice);
 
 
 
