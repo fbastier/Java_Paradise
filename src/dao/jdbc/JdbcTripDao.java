@@ -17,13 +17,13 @@ public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
     }
 
     @Override
-    public Boolean updateTrip(Trip object) {
-        return null;
+    public boolean updateTrip(Trip object) {
+        return false;
     }
 
     @Override
-    public Boolean removeTrip(Trip object) {
-        return null;
+    public boolean removeTrip(Trip object) {
+        return false;
     }
 
     @Override
