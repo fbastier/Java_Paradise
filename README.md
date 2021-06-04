@@ -2,7 +2,7 @@
 
 1 - depot diagramme de classe UML 
 
-2 - Base de donnée sous Mysql
+2 - Base de données sous Mysql
 
 ```SQL
 DROP DATABASE IF EXISTS ParadiseSQL;
