@@ -1,4 +1,9 @@
 package dao.jdbc;
 
-public class JdbcDao {
+import java.sql.Connection;
+
+public abstract class JdbcDao {
+
+    protected Connection connection;
+
 }
