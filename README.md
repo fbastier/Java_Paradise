@@ -30,3 +30,5 @@ CREATE TABLE TripTable (
 
 SHOW TABLES;
 ```
+
+3- Mettre à jour URL, USER & PASSWORD dans ConnectionManager.java
