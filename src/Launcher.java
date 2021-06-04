@@ -13,19 +13,34 @@ public class Launcher {
 
         switch (choice) {
             case 1 -> {
-                System.out.println("Name : ");
+                System.out.print("Name : ");
                 Scanner kb1 = new Scanner(System.in);
                 String name = kb1.nextLine();
                 Long id = jdbcPlaceDao.createPlace(new Place(name));
                 System.out.printf("Place added with the ID-%d.\n", id);
-                System.out.println("---------------------------");
-                MainMenu();
+                System.out.println("---------------------------\n");
             }
             case 2 -> {
 
             }
             case 3 -> {
 
+            }
+            case 4 -> {
+
+            }
+            case 5 -> {
+
+            }
+            case 6 -> {
+
+            }
+            case 7 -> {
+
+            }
+            case 8 -> {
+                System.out.println("Bye, see you next time !");
+                System.exit(0);
             }
             default -> {
                 System.out.println("Please, choose a number between 1 to 8 !");
