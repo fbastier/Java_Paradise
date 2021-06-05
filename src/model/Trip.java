@@ -6,6 +6,15 @@ public class Trip {
     private Place arrivalPlace;
     private Float price;
 
+    public Trip() {
+    }
+
+    public Trip(Place departurePlace, Place arrivalPlace, Float price) {
+        this.departurePlace = departurePlace;
+        this.arrivalPlace = arrivalPlace;
+        this.price = price;
+    }
+
     public Long getId() {
         return id;
     }
