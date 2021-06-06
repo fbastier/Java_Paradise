@@ -1,10 +1,12 @@
 package dao.jdbc;
 
 import dao.TripDao;
+import model.Place;
 import model.Trip;
 import util.ConnectionManager;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
@@ -40,8 +42,21 @@ public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
 
 
     @Override
-    public Trip findTrip(Long aLong) {
-        return null;
+    public Trip findTrip(Long id) {
+        Trip tripFound = null;
+
+        String query = "SELECT * FROM TripTable WHERE id = ?";
+
+        try (PreparedStatement pSt = ConnectionManager.getConnection().prepareStatement(query)) {
+            pSt.setLong(1, id);
+            ResultSet rs = pSt.executeQuery();
+            if (rs.next()) {
+                tripFound = mapToTrip(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tripFound;
     }
 
     @Override
@@ -57,5 +72,13 @@ public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
     @Override
     public List<Trip> findAllTrip() {
         return null;
+    }
+
+    private Trip mapToTrip(ResultSet rs) throws SQLException {
+        Long id = rs.getLong("id");
+        Place departurePlace = (Place) rs.getObject("departurePlace");
+        Place arrivalPlace = (Place) rs.getObject("arrivalPlace");
+        Float price = rs.getFloat("price");
+        return new Trip (id,departurePlace,arrivalPlace,price );
     }
 }
