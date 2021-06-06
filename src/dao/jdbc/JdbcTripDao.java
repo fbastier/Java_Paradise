@@ -90,11 +90,11 @@ public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
         try(PreparedStatement pSt = ConnectionManager.getConnection().prepareStatement(query)) {
             pSt.setLong(1,tripToDelete.getId());
             tripDeleted = pSt.execute();
-            connection.commit();
+            ConnectionManager.getConnection().commit();
         } catch (SQLException e) {
             e.printStackTrace();
             try{
-                connection.rollback();
+                ConnectionManager.getConnection().rollback();
             } catch (SQLException f) {
                 f.printStackTrace();
             }
@@ -118,10 +118,11 @@ public class JdbcTripDao extends JdbcDao implements TripDao<Long, Trip> {
     }
 
     private Trip mapToTrip(ResultSet rs) throws SQLException {
+        JdbcPlaceDao jdbcPlaceDao = new JdbcPlaceDao();
         Long id = rs.getLong("id");
-        Place departurePlace = (Place) rs.getObject("departurePlace");
-        Place arrivalPlace = (Place) rs.getObject("arrivalPlace");
+        Long departurePlace = rs.getLong("departurePlace");
+        Long arrivalPlace = rs.getLong("arrivalPlace");
         Float price = rs.getFloat("price");
-        return new Trip (id,departurePlace,arrivalPlace,price );
+        return new Trip (id,jdbcPlaceDao.findPlaceById(departurePlace),jdbcPlaceDao.findPlaceById(arrivalPlace),price );
     }
 }

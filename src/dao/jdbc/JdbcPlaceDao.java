@@ -65,11 +65,11 @@ public class JdbcPlaceDao extends JdbcDao implements PlaceDao<Long, Place> {
             pSt.setString(1, placeToUpdate.getName());
             pSt.setLong(2, placeToUpdate.getId());
             updateRows = pSt.executeUpdate();
-            connection.commit();
+            ConnectionManager.getConnection().commit();
         }catch (SQLException e) {
             e.printStackTrace();
             try {
-                connection.rollback();
+                ConnectionManager.getConnection().rollback();
             }catch (SQLException f) {
                 f.printStackTrace();
             }
