@@ -16,16 +16,15 @@ CREATE TABLE PlaceTable (
     PRIMARY KEY (id)
 );
 
-CREATE INDEX Index_Name ON PlaceTable(name); 
 
 CREATE TABLE TripTable (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    departurePlace VARCHAR(80),
-    arrivalPlace VARCHAR(80),
+    departurePlace BIGINT,
+    arrivalPlace BIGINT,
     price DOUBLE(8,2),
     PRIMARY KEY (id),
-    CONSTRAINT FK_Departure FOREIGN KEY (departurePlace) REFERENCES PlaceTable(name),
-    CONSTRAINT FK_Arrival FOREIGN KEY (arrivalPlace) REFERENCES PlaceTable(name)
+    CONSTRAINT FK_Departure FOREIGN KEY (departurePlace) REFERENCES PlaceTable(id),
+    CONSTRAINT FK_Arrival FOREIGN KEY (arrivalPlace) REFERENCES PlaceTable(id)
 );
 
 SHOW TABLES;
