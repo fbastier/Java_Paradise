@@ -1,7 +1,9 @@
 package menu;
 
 import dao.jdbc.JdbcPlaceDao;
+import dao.jdbc.JdbcTripDao;
 import model.Place;
+import model.Trip;
 
 import java.util.Scanner;
 
@@ -72,5 +74,39 @@ public class Menu {
             e.printStackTrace();
         }
         kb2.close();
+    }
+
+    /**
+     * Create a trip in the DB ParadiseSQL.
+     */
+    public void menu5() {
+        JdbcTripDao jdbcTripDao = new JdbcTripDao();
+        JdbcPlaceDao jdbcPlaceDao = new JdbcPlaceDao();
+        System.out.print("Departure : Please enter the id of the place : ");
+        Scanner kb5 = new Scanner(System.in);
+        Long idDep = kb5.nextLong();
+        Place placeDep = jdbcPlaceDao.findPlaceById(idDep);
+        System.out.printf("Place : %s\n", placeDep.getName());
+        System.out.print("Destination : Please enter the id of the place : ");
+        Scanner kb5b = new Scanner(System.in);
+        Long idArr = kb5b.nextLong();
+        Place placeArr = jdbcPlaceDao.findPlaceById(idArr);
+        System.out.printf("Place : %s\n", placeArr.getName());
+        System.out.print("Price : ");
+        Scanner kb5c = new Scanner(System.in);
+        Float price = kb5c.nextFloat();
+
+        try {
+            Long idTrip = jdbcTripDao.createTrip(new Trip(placeDep, placeArr, price));
+            System.out.printf("Trip added with the ID-%d\n", idTrip);
+            System.out.println("---------------------------\n");
+        } catch (Exception e) {
+            System.out.println("Something goes wrong. Can't add this trip");
+            System.out.println("---------------------------\n");
+            e.printStackTrace();
+        }
+        kb5.close();
+        kb5b.close();
+        kb5c.close();
     }
 }
